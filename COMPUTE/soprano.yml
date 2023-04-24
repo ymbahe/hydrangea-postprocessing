@@ -1,0 +1,90 @@
+# General settings for simulation to process
+Sim:
+  Rootdir:    '/virgo/simulations/Hydrangea/10r200/'
+  Type:       'HYDRO'
+  Start:      0   # First sim to process
+  End:        1   # Beyond-last sim to process
+
+# Range of sneps to process
+Snep:
+  List:   'short_movie'
+  Start:  0      # Default: 0
+  End:   10      # Default [None]: all
+  Redo:  False   # Default: False (do not re-do pre-existing)
+
+# How much output the code should produce (lower = less)
+Verbose:      0   # Default: 0
+
+
+# Input options:
+Input:
+    IncludeBoundary:      False
+    FromCantor:           True
+    File:                 'CantorCatalogue_24Jun19.hdf5'
+
+# Galaxy binding options:
+Galaxies:
+    IncludeExtraSnaps:    True
+    Threshold:
+        Mstar:            9.0
+        Mtot:             11.0
+    MinNum:               10
+
+# Options for output calculation and writing:
+Output:  
+
+  # File to write output to
+  File:      'Snipshots/CantorSoprano_24Jun19_TEST'
+
+  # Compute and write additional quantities, beyond pure segmentation maps?
+  GalaxyProperties:      True               # Default: True
+
+  # Mass thresholds for subhaloes with 'extra' output properties (log M/M_sun)
+  Extra:
+      Mstar:                             # Default:  None
+      Mtot:                              # Default:  None 
+
+  # Write out particle binding energies?
+  WriteBindingEnergy:     0                 # Default: 0
+  
+  # Write out particle radii?
+  WriteRadii:             True              # Default: True 
+
+  # Compute CentreOfPotential immediately after unbinding, instead of after
+  # *all* galaxies are unbound? This may mean that the 'central' particle
+  # is not actually in the galaxy
+  COPAtUnbinding:         True              # Default: True
+
+
+# Options for MONK engine:
+Monk:
+
+  # Verbosity level of MONK:
+  Verbose:           0                    # Default: 0
+
+  # Use monotonic unbinding mode (1, instead of 'vdBO-like', 0) for sats?
+  Monotonic: 1                            # Default: 1
+
+  # Center on ZMF for satellites (0), or 10% most-bound particles (1)?
+  Centering: 1                            # Default: 1
+
+  # Allow varying centre for satellites (0) or keep fixed (1)?
+  FixCentre: 0                            # Default: 0
+
+  # Bypass Monk completely (testing only!! --> keeps all particles as bound)
+  Bypass: False                           # Default: False
+
+  # Tree opening criterion within MONK -- larger means less accurate.
+  PotErrTol: 1.0                          # Default: 1.0
+
+
+# Debugging and testing options:
+Check:
+
+  # Cadence of full reporting for galaxy unbinding (every Nth):
+  ReportFrequency: 1000
+
+  # Debug option to suppress Hubble flow
+  NoHubble:                False             # Default: False
+
+

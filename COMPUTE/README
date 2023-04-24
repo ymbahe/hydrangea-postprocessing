@@ -1,0 +1,167 @@
+This directory contains scripts that compute additional galaxy (or particle)
+properties, beyond what is provided by Subfind. This also includes
+re-computations of properties that are affected by bugs in Subfind.
+  
+************************
+*** Individual files ***
+************************ 
+
+!! ------------------
+!! compute_periapo.py
+!! ------------------
+
+Compute the peri-/apo-centric distances and times of galaxies, based on the
+catalogue of interpolated positions. Results are (currently) all written to
+one file, but without proper combining from simulations...?!?
+
+
+-------------------
+create_sneplists.sh
+-------------------
+
+Shell script to generate the various snepshot lists automatically.
+
+
+----------------------------
+find_particle_root_galaxy.py
+----------------------------
+
+Determine the 'birth' or 'root' galaxy for each particle of a given
+type. Starting with the first snapshot in which the particle exists (in its
+type, for stars/BHs), the script tests whether it belongs to a galaxy, which is
+then its 'root'. Particles that are not associated to a galaxy are re-tested
+in the subsequent snapshot, until z = 0 if necessary. 
+
+Optionally, a galaxy hosting the particle can be discarded if its mass is
+below an adjustable threshold in units of the particle's z = 0 galaxy mass,
+either at z = 0 or in the snapshot under consideration.
+
+For stars/BHs, also the root galaxy of the parent gas particle is determined,
+in an analogous way but starting from snapshot 0. 
+
+Used to be called `stellar_birth_props.py'.
+
+
+--------------------------
+flag_accreted_particles.py
+--------------------------
+
+Combine root galaxy and current (default: z = 0) galaxy to an `accretion
+status' (in-situ, merged, stripped, ...), and store their sums per subhalo.
+
+----------------------------------
+flag_accreted_particles_massbin.py
+----------------------------------
+
+Combine root galaxy and current (default: z = 0) galaxy to an `accretion
+status' (in-situ, merged, stripped, ...) for each particle. Particles are then
+further split by the mass of their root (birth) galaxy and their radius at z =
+0, and sums over subhaloes are stored in
+[freya]/highlev/ParticleOriginFlags_[...].hdf5
+
+
+----------------------
+flag_highres_region.py
+----------------------
+
+Determine which subhalos lie in the resolved high-resolution region.
+
+This program loops through haloes and snapshots, and checks whether
+each of the subhaloes lie closer than a given threshold value
+from a low-res boundary particle. The resulting flag-list is then
+written out into the subfind groups_xxx directory as a 
+single-dataset HDF5 file (BoundaryFlag.hdf5).
+
+
+------------------------
+interpolate_positions.py
+------------------------
+
+Estimate the positions of subhaloes at high cadence through cubic-spline
+interpolation, starting from the (snipshot-based) GalaxyPaths catalogue.
+
+
+-----------------------
+match_hydro_dmo_full.py
+-----------------------
+
+Identify bijectively matched subhaloes between corresponding DMONLY and HYDRO
+simulations, by looking for overlaps in DM particles.
+
+
+----------------------
+measure_infall_time.py
+----------------------
+
+(Rather old) script that computes the 'infall time' for galaxies from an input
+(full) catalogue. 
+
+!! Needs updating, something like this is valuable. !!
+
+
+---------------------------
+merge_spurious_subhaloes.py
+---------------------------
+
+Identify subhaloes that may be spurious, based on lying very close to a more
+massive galaxy in the same FOF group. The result is written to an HDF5 file
+(SubhaloMergerFlag.hdf5), which is then collected into SubhaloExtra.hdf5 (by
+../COLLECT/collect_extra_subhalo_info.py)
+
+
+--------------------
+realign_star_data.py
+--------------------
+
+Align the SHI and luminosity data for stars from snapshot 29 from the ESP
+files to snapshot alignment. Output is written (in a single file) to 
+[freya]/highlev/StellarMagnitudes_029_TEST.hdf5.
+
+
+---------------
+reassign_bhs.py
+---------------
+
+Reassign BH particles that are not close to the centre of their subhalo to a
+(potentially) more fitting subhalo. Also compute the mass of BH particles
+within min(3kpc, stellar half mass radius) for each subhalo.
+
+
+--------------------
+recompute_bh_mass.py
+--------------------
+
+Recompute the total BH (subgrid) mass of all subhaloes in all snapshots, in
+all simulations, based on the Subfind ID list but the snapshot BH masses. Also
+check whether this differs from the subfind value, which is due to the 'mixup'
+bug.
+
+
+-------------------------------
+recompute_subhalo_membership.py
+-------------------------------
+
+Pathfinder for CANTOR, recomputes the subhalo membership at z = 0 only.
+
+
+----------------------
+regularize_centrals.py
+----------------------
+
+Re-compute central/satellite status of galaxies by considering their full
+evolution over all snapshots. The aim is that, for each pair of galaxies that
+are every occupying the same FOF group, the same one is always the central, so
+that central/satellite swaps are eliminated. The result is stored in a single HDF5 file per simulation, located in [freya]/highlev/RegularizedCentrals.hdf5.
+
+
+-----------------------
+stellar_mass_deficit.py
+-----------------------
+
+Computes the actual and initial stellar mass deficit (z = 0 minus max), for
+all galaxies in a (combined) input evolution catalogue. Looks slightly
+outdated (last modified January 2017).
+
+ 
+
+	
