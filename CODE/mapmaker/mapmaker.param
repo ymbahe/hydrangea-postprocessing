@@ -1,0 +1,72 @@
+# ********************************
+# ***                          ***
+# **  MAPMAKER parameter file   **
+# ***                          ***
+# ********************************
+
+
+# ===================
+#  Simulation info 
+# ==================
+
+# Base directory of the simulation to process
+SimBaseDir           /virgo/simulations/Hydrangea/10r200/HaloF22/RUN_N2048_HORNET_ID84
+
+# List of snepshots to process (in SimBaseDir)
+SnepshotListName     sneplist_full.dat
+
+# Total number of snepshots expected in list. This is a check variable, and
+# can be set to '-1' as dummy value (then no check will be done).
+NumOfSnepshots       -1
+
+# Simulation label to be printed into the output files (as attribute in
+# "Header")
+SimLabel            HaloF22_ID84  
+
+
+#  ===========
+#  Output info
+#  =========== 
+
+# Directory in which to write output
+# (this can be different from SimBaseDir)
+OutputDirectory      SimBaseDir
+
+# Name of output file for each snepshot
+OutputFileName       ParticleMap.hdf5
+
+
+# =============
+# Program setup
+# =============
+
+# First and last snepshot from list to process
+StartSnep            0
+EndSnep              -1
+
+# Which particle types to map (sum of 2^i, default 0--1--4--5 = 1+2+16+32 = 51)
+MapPartTypes         51
+
+# Flag to enable [1] or disable [0] automatic creation of snepshot list
+CreateSneplist       1
+
+
+# ===============
+# Map constraints
+# ===============
+
+# Desired average number of particles per cell
+# (larger = coarser grid, but smaller map files)
+DesNumPerCell        250
+
+# Maximum permitted Peano-Hilbert level of cells
+# (i.e. maximum of 2^(n-1) cells per dimension)
+# N.B.: No point going below level to which particles are sorted on disk
+MaxPeanoHilbertLevel   21      
+
+# Maximum permitted side-length of a single cell (in code units)
+MaxCellSize           5
+
+# Minimum and maximum permitted number of cells in map
+MinNumOfCells        100
+MaxNumOfCells        15000000

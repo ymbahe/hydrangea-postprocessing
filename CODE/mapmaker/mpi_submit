@@ -1,0 +1,26 @@
+#!/bin/tcsh
+
+#$ -S /bin/tcsh
+
+### change to current working dir
+#$ -cwd
+
+### Parallel environment
+#$ -pe impi_hydra 128
+
+### Wallclock requirement (seconds)
+#$ -l h_rt=86400
+
+### Memory requirement (per node?)
+#$ -l h_vmem=62G
+
+#$ -o output_MapMakerF28.0.dat
+#$ -e error_MapMakerF28.0.dat
+
+#$ -m bea
+#$ -M ybahe@mpa-garching.mpg.de
+
+#$ -N MapMaker_F28
+
+
+mpiexec -np 128 ./mapmaker mapmaker.param
