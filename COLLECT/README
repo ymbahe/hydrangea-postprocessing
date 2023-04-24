@@ -1,0 +1,123 @@
+This directory contains scripts that collect data from multiple source files
+and/or snapshots. They may also do some small data computations (such as
+interpolating over gaps).
+
+************************
+*** Individual files ***
+************************ 
+
+---------
+add_fp.py
+---------
+
+Add on the forward-projected maximum subhalo and stellar masses to
+the FullGalaxyTables catalogues.
+
+
+-------------------
+add_hostDistance.py
+-------------------
+
+Add the distance to the nearest 'host' neighbour galaxy to the 
+FullGalaxyTables catalogues. This refers to the (Subfind) central for
+satellites, and to the nearest FOF group with greater M200c for centrals.
+
+
+-----------
+add_shmr.py
+-----------
+
+Add the stellar half mass radius (in 3D) to the FullGalaxyTables.
+
+
+-------------------
+add_spectre_flag.py
+-------------------
+
+Add a pointer to spectre parents, and (optionally) a flag telling whether a
+galaxy is a spectre, to the 'Full' group in FullGalaxyTables.
+
+
+----------------------------
+add_velocity_to_positions.py
+----------------------------
+
+Extract the velocity of all subhaloes in each snap from the subfind catalogue
+(Subhalo/Velocity), align it to galaxy IDs. For subhaloes that are not alive
+in a given snapshot, velocities are taken from the corresponding GalaxyPaths
+table. Where even this fails, velocity gaps are interpolated over using cubic
+spline fitting (if there are at least four good snapshots per galaxy), or
+linear fitting if there are at least two. 
+
+The output is added to the GalaxyPositionsSnap.hdf5 file, in data set
+'Velocity'.
+
+
+-----------------------
+compare_subfind_monk.py
+-----------------------
+
+Extract a comparison catalogue of matched galaxy properties between Subfind
+and MONK subhaloes.
+
+
+-----------------------------
+collect_extra_subhalo_info.py
+-----------------------------
+
+Collect various post-processing outputs in one file
+(highlev/SubhaloExtra.hdf5). This includes HYDRO <--> DM subhalo matches,
+boundary flags, close pair info, re-computed BH info, and spectre info.
+
+
+-----------------------
+extract_bh_evolution.py
+-----------------------
+
+Extract and combine BH data (including from recomputation) across different
+snapshots. The result is stored in [freya]/highlev/GalaxyBHTablesMay18.hdf5.
+
+
+--------------------------------
+extract_full_galaxy_catalogue.py
+--------------------------------
+
+Extract a combined evolution catalogue across all simulations. Used to be
+called `extract_galaxy_growth_[date].py'. 
+!! Should be checked for possible need to clean/tidy up and include comments. !!
+
+
+--------------------
+extract_positions.py
+--------------------
+
+Extract the positions of all subhaloes in each snap from the subfind catalogue
+(Subhalo/CentreOfPotential), converted to proper Mpc and aligned to galaxy
+IDs.
+
+For subhaloes that are not alive in a given snapshot, velocities are taken
+from the corresponding GalaxyPaths table. Where even this fails, velocity gaps
+are interpolated over using cubic spline fitting (if there are at least four
+good snapshots per galaxy), or linear fitting if there are at least two.
+ 
+The output is added to the GalaxyPositionsSnap.hdf5 file, in data set
+'Centre'.
+
+
+---------------------------
+extract_galaxy_evolution.py
+---------------------------
+
+Extract the most frequently used properties of galaxies from all snapshots,
+and store them in a single HDF5 file aligned by galaxy ID. Also compute peak
+quantities along entire history.
+
+
+
+
+
+
+
+ 
+
+
