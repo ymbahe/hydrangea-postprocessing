@@ -1,0 +1,50 @@
+This directory contains post-processing codes that are, at least in principle,
+suitable for both Hydrangea and other Eagle-like simulations.
+
+***********************
+*** Subdirectories: ***
+***********************
+
+CODE: Contains the source codes (mostly C/C++) for post-processing programs.
+
+COLLECT: Scripts that collect data from multiple source files and/or
+snapshots. They may also do some small data computations (such as
+interpolating over gaps).
+
+COMPUTE: Scripts that compute additional galaxy (or particle) properties,
+beyond what is provided by Subfind. This also includes re-computations of
+properties that are affected by bugs in Subfind.  
+
+EAGLE: Contains parameter files/logs/submission scripts for EAGLE-specific
+post-processing runs.
+
+HYDRANGEA: Contains parameter files/logs/submission scripts for
+Hydrangea-specific post-processing runs. As of 8-May-2019, this also still
+contains some actual python program scripts, but these will be moved here in
+the long term.
+
+OLD: Previous versions of some of the programs, kept only in case they may be
+needed for reference at some point in the future.
+
+STRUCTURE_OUTPUTS: Scripts to catalogue and align outputs from individual
+simulations, in particular snipshots.
+
+For further details on their contents, see the individual README files in the
+subdirectories.
+
+
+************************
+*** Individual files ***
+************************ 
+
+
+
+
+
+
+
+
+
+
+ 
+  
